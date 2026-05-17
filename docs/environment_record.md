@@ -25,7 +25,7 @@ where python
 
 实际记录：
 
-- Python 版本：待实验后填写。
+- Python 版本：Python 3.10.11。
 - Python 路径：待实验后填写。
 - 虚拟环境路径：`.venv/`。
 
@@ -41,10 +41,10 @@ nvidia-smi
 
 实际记录：
 
-- GPU 型号：待实验后填写。
-- 显存大小：待实验后填写。
-- NVIDIA Driver 版本：待实验后填写。
-- CUDA Version：待实验后填写。
+- GPU 型号：NVIDIA GeForce RTX 4070 Laptop GPU。
+- 显存大小：约 8GB。
+- NVIDIA Driver 版本：591.86。
+- CUDA Version：13.1。
 
 ## CUDA/PyTorch 检查命令
 
@@ -56,10 +56,11 @@ python -c "import torch; print('torch:', torch.__version__); print('cuda availab
 
 实际记录：
 
-- PyTorch 版本：待实验后填写。
-- CUDA 是否可用：待实验后填写。
-- PyTorch CUDA 版本：待实验后填写。
-- PyTorch 识别到的 GPU：待实验后填写。
+- PyTorch 版本：2.12.0+cpu。
+- CUDA 是否可用：False。
+- PyTorch CUDA 版本：None。
+- PyTorch 识别到的 GPU：CUDA not available。
+- 当前状态：虚拟环境中安装的是 CPU 版 PyTorch，CUDA 版 PyTorch 正在下载中，GPU 可用性待安装完成后验证。
 
 ## 依赖安装命令
 
@@ -69,6 +70,7 @@ python -c "import torch; print('torch:', torch.__version__); print('cuda availab
 py -3.11 -m venv .venv
 .\.venv\Scripts\Activate.ps1
 python -m pip install --upgrade pip
+pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu126
 pip install -r requirements.txt
 ```
 
@@ -78,10 +80,18 @@ pip install -r requirements.txt
 python -m venv .venv
 .\.venv\Scripts\Activate.ps1
 python -m pip install --upgrade pip
+pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu126
 pip install -r requirements.txt
 ```
 
-如果 `requirements.txt` 中的 CUDA 12.1 PyTorch wheel 与本机环境不匹配，应先按 PyTorch 官网命令安装匹配版本的 `torch`，再安装其余依赖：
+如果当前虚拟环境中已安装 CPU 版 PyTorch，应先卸载后再安装 CUDA 版 PyTorch：
+
+```powershell
+pip uninstall -y torch torchvision torchaudio
+pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu126
+```
+
+如果 CUDA 12.6 PyTorch wheel 与本机环境不匹配，应先按 PyTorch 官网命令安装匹配版本的 `torch`，再安装其余依赖：
 
 ```powershell
 pip install transformers datasets evaluate peft accelerate scikit-learn pandas matplotlib tqdm
@@ -103,12 +113,14 @@ pip install transformers datasets evaluate peft accelerate scikit-learn pandas m
 | --- | --- |
 | 操作系统 | 待实验后填写 |
 | IDE/终端 | VS Code PowerShell |
-| Python 版本 | 待实验后填写 |
-| PyTorch 版本 | 待实验后填写 |
-| CUDA 是否可用 | 待实验后填写 |
-| PyTorch CUDA 版本 | 待实验后填写 |
-| GPU 型号 | 待实验后填写 |
-| GPU 显存 | 待实验后填写 |
+| Python 版本 | Python 3.10.11 |
+| PyTorch 版本 | 当前为 2.12.0+cpu，CUDA 版正在下载中 |
+| CUDA 是否可用 | 当前为 False，待 CUDA 版 PyTorch 安装完成后验证 |
+| PyTorch CUDA 版本 | 当前为 None，待 CUDA 版 PyTorch 安装完成后验证 |
+| GPU 型号 | NVIDIA GeForce RTX 4070 Laptop GPU |
+| GPU 显存 | 约 8GB |
+| NVIDIA Driver 版本 | 591.86 |
+| nvidia-smi CUDA Version | 13.1 |
 | Transformers 版本 | 待实验后填写 |
 | PEFT 版本 | 待实验后填写 |
 | Datasets 版本 | 待实验后填写 |
@@ -119,4 +131,3 @@ pip install transformers datasets evaluate peft accelerate scikit-learn pandas m
 | 数据集缓存目录 | `cache/datasets/` |
 | checkpoints 目录 | `checkpoints/`，不提交 Git |
 | 实验结果目录 | `results/`，保留小型结果文件 |
-

@@ -103,6 +103,8 @@ def append_metrics(row):
         "training_time_seconds",
         "epochs",
         "batch_size",
+        "max_train_samples",
+        "max_eval_samples",
         "learning_rate",
         "fp16",
     ]
@@ -244,6 +246,8 @@ def main():
             "training_time_seconds": round(training_time, 2),
             "epochs": args.epochs,
             "batch_size": args.batch_size,
+            "max_train_samples": args.max_train_samples if args.max_train_samples is not None else "full",
+            "max_eval_samples": args.max_eval_samples if args.max_eval_samples is not None else "full",
             "learning_rate": learning_rate,
             "fp16": use_fp16,
         }

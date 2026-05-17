@@ -18,11 +18,12 @@
 - `python -c "import torch; print(torch.cuda.is_available())"` 能正常执行。
 - `roberta-base` 能下载或从缓存加载。
 - GLUE/SST-2 能下载或从缓存加载。
-- full fine-tuning 冒烟测试能启动并结束。
-- LoRA r=4 冒烟测试能启动并结束。
-- LoRA r=8 冒烟测试能启动并结束。
-- LoRA r=16 冒烟测试能启动并结束。
+- `smoke_full_finetune` 冒烟测试能启动并结束。
+- `smoke_lora_r4` 冒烟测试能启动并结束。
+- `smoke_lora_r8` 冒烟测试能启动并结束。
+- `smoke_lora_r16` 冒烟测试能启动并结束。
 - `results/metrics.csv` 有新增记录。
+- 冒烟测试记录的 `run_name` 均以 `smoke_` 开头。
 - `results/logs/` 下有对应 `.log` 文件。
 - `results/figures/loss_curve.png` 已生成。
 - `results/figures/rank_accuracy.png` 已生成。
@@ -33,10 +34,10 @@
 
 | 实验名称 | validation accuracy | training loss | training time | 是否通过 |
 | --- | --- | --- | --- | --- |
-| full_finetune | 待实验后填写 | 待实验后填写 | 待实验后填写 | 待实验后填写 |
-| lora_r4 | 待实验后填写 | 待实验后填写 | 待实验后填写 | 待实验后填写 |
-| lora_r8 | 待实验后填写 | 待实验后填写 | 待实验后填写 | 待实验后填写 |
-| lora_r16 | 待实验后填写 | 待实验后填写 | 待实验后填写 | 待实验后填写 |
+| smoke_full_finetune | 待实验后填写 | 待实验后填写 | 待实验后填写 | 待实验后填写 |
+| smoke_lora_r4 | 待实验后填写 | 待实验后填写 | 待实验后填写 | 待实验后填写 |
+| smoke_lora_r8 | 待实验后填写 | 待实验后填写 | 待实验后填写 | 待实验后填写 |
+| smoke_lora_r16 | 待实验后填写 | 待实验后填写 | 待实验后填写 | 待实验后填写 |
 
 ## 正式实验检查项
 
@@ -71,6 +72,8 @@
 - 每组实验均记录 total parameters。
 - 每组实验均记录 trainable parameter ratio。
 - 每组实验均记录 training time。
+- 检查 `metrics.csv` 中正式实验的 `max_train_samples` 和 `max_eval_samples` 是否为 `full` 或空。
+- 不得将 `smoke_` 开头的实验结果写入最终报告。
 - 三张图表已经根据正式实验结果重新生成。
 
 正式实验指标记录：
@@ -113,4 +116,3 @@
 - `results/figures/trainable_params.png`。
 - 关键运行截图。
 - 对实验结果的简要说明，包含 full fine-tuning 与不同 LoRA rank 的对比结论，待实验后填写。
-

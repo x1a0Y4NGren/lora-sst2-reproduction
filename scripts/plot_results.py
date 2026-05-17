@@ -14,6 +14,10 @@ def latest_by_run(df):
     return df.drop_duplicates(subset=["run_name"], keep="last")
 
 
+def official_runs_only(df):
+    return df[~df["run_name"].astype(str).str.startswith("smoke_")]
+
+
 def save_loss_curve(df):
     ordered = df.sort_values(["method", "lora_rank"], na_position="first")
     plt.figure(figsize=(8, 5))
@@ -66,9 +70,17 @@ def main():
 
     FIGURES_DIR.mkdir(parents=True, exist_ok=True)
     df = pd.read_csv(METRICS_PATH)
-    df = latest_by_run(df)
     if df.empty:
         raise ValueError("metrics.csv is empty.")
+
+    df = official_runs_only(df)
+    if df.empty:
+        raise ValueError(
+            "No official experiment rows found after filtering smoke_ runs. "
+            "Run .\\run_all.ps1 without MaxTrainSamples/MaxEvalSamples before generating report figures."
+        )
+
+    df = latest_by_run(df)
 
     save_loss_curve(df)
     save_rank_accuracy(df)

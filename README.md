@@ -96,7 +96,9 @@ pip install transformers datasets evaluate peft accelerate scikit-learn pandas m
 .\run_all.ps1 -BatchSize 4
 ```
 
-如果只想先快速检查流程是否能跑通，可以用小样本 smoke run：
+正式实验不能带 `MaxTrainSamples` 或 `MaxEvalSamples`，否则会变成小样本冒烟测试，不能用于报告准确率。
+
+如果只想先快速检查流程是否能跑通，可以用小样本冒烟测试。冒烟测试只验证流程，不用于报告准确率；脚本会自动把实验名加上 `smoke_` 前缀，例如 `smoke_full_finetune`、`smoke_lora_r4`：
 
 ```powershell
 .\run_all.ps1 -BatchSize 4 -Epochs 1 -MaxTrainSamples 64 -MaxEvalSamples 64
@@ -138,7 +140,9 @@ python scripts/plot_results.py
 - total parameters
 - trainable parameter ratio
 - training time
-- epochs、batch size、learning rate、fp16 状态
+- epochs、batch size、max train/eval samples、learning rate、fp16 状态
+
+正式图表默认过滤掉 `run_name` 以 `smoke_` 开头的记录，避免冒烟测试结果污染报告图表。
 
 ## 目录结构
 

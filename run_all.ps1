@@ -7,6 +7,10 @@ param(
 
 $ErrorActionPreference = "Stop"
 
+Set-Location -LiteralPath $PSScriptRoot
+
+$IsSmokeRun = ($MaxTrainSamples -gt 0) -or ($MaxEvalSamples -gt 0)
+
 function Run-Experiment {
     param(
         [string]$RunName,
@@ -14,9 +18,14 @@ function Run-Experiment {
         [int]$Rank = 0
     )
 
+    $EffectiveRunName = $RunName
+    if ($IsSmokeRun) {
+        $EffectiveRunName = "smoke_$RunName"
+    }
+
     $argsList = @(
         "scripts/train.py",
-        "--run_name", $RunName,
+        "--run_name", $EffectiveRunName,
         "--method", $Method,
         "--epochs", "$Epochs",
         "--batch_size", "$BatchSize",

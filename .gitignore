@@ -238,6 +238,7 @@ training_args.bin
 !results/logs/
 !results/logs/.gitkeep
 !results/logs/*.log
+results/logs/trainer/
 !results/figures/
 !results/figures/.gitkeep
 !results/figures/*.png

@@ -74,34 +74,46 @@
 
 **问题现象**
 
-`torch.cuda.is_available()` 输出 `False`，训练无法使用 GPU 或 fp16 被自动关闭。
+初次检查 PyTorch 时，当前虚拟环境中的 PyTorch 未识别 CUDA，训练将无法使用 GPU，fp16 也会被自动关闭。
 
 **触发命令**
 
 ```powershell
-python -c "import torch; print(torch.cuda.is_available())"
+python -c "import torch; print('torch:', torch.__version__); print('cuda:', torch.version.cuda); print('available:', torch.cuda.is_available()); print(torch.cuda.get_device_name(0) if torch.cuda.is_available() else 'CUDA not available')"
 ```
 
 **报错信息**
 
 ```text
-待实验后填写。
+torch: 2.12.0+cpu
+cuda: None
+available: False
+CUDA not available
 ```
 
 **原因分析**
 
-可能原因包括 NVIDIA 驱动异常、PyTorch CUDA wheel 与本机环境不匹配、安装到了 CPU 版本 PyTorch，或当前终端未激活正确虚拟环境。
+当前虚拟环境中安装的是 CPU 版 PyTorch，不是 CUDA 版 PyTorch。`torch.version.cuda` 为 `None`，说明该 PyTorch 构建本身不包含 CUDA 支持。
 
 **解决方案**
 
-- 确认已激活 `.venv`。
-- 运行 `nvidia-smi` 检查驱动和 GPU 状态。
-- 按 PyTorch 官网命令重新安装与本机匹配的 CUDA 版本 PyTorch。
-- 重新运行 CUDA/PyTorch 检查命令。
+卸载 CPU 版 PyTorch：
+
+```powershell
+pip uninstall -y torch torchvision torchaudio
+```
+
+安装 CUDA 版 PyTorch：
+
+```powershell
+pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu126
+```
+
+安装完成后重新运行 CUDA/PyTorch 检查命令。
 
 **是否已解决**
 
-待实验后填写。
+处理中。CUDA 版 PyTorch 正在下载中，GPU 可用性待安装完成后验证。
 
 ### Hugging Face 下载失败
 
@@ -135,4 +147,3 @@ python -c "import torch; print(torch.cuda.is_available())"
 **是否已解决**
 
 待实验后填写。
-
