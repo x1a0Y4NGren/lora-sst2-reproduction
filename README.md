@@ -42,7 +42,6 @@
 py -3.11 -m venv .venv
 .\.venv\Scripts\Activate.ps1
 python -m pip install --upgrade pip
-pip install -r requirements.txt
 ```
 
 如果本机没有 Python 3.11，也可以用 Python 3.10。深度学习依赖对最新 Python 版本的支持可能滞后，不建议课程复现实验优先使用过新的 Python 版本。
@@ -53,10 +52,31 @@ pip install -r requirements.txt
 python -m venv .venv
 .\.venv\Scripts\Activate.ps1
 python -m pip install --upgrade pip
+```
+
+### 安装 CUDA 版 PyTorch
+
+先安装 CUDA 版 PyTorch，再安装 `requirements.txt` 中的项目通用依赖。
+
+```powershell
+pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu126
+```
+
+安装后检查 GPU 是否可用：
+
+```powershell
+python -c "import torch; print(torch.__version__); print(torch.version.cuda); print(torch.cuda.is_available()); print(torch.cuda.get_device_name(0) if torch.cuda.is_available() else 'CUDA not available')"
+```
+
+### 安装项目通用依赖
+
+确认 CUDA 版 PyTorch 安装完成后，再安装其余依赖：
+
+```powershell
 pip install -r requirements.txt
 ```
 
-`requirements.txt` 默认使用 PyTorch CUDA 12.1 wheel 源。如果你的显卡驱动或 CUDA 环境不匹配，请按 PyTorch 官网命令安装与你机器匹配的 `torch` 版本，然后再执行：
+如果 CUDA 12.6 wheel 与本机驱动不匹配，请按 PyTorch 官网命令安装与你机器匹配的 CUDA 版 PyTorch，然后再执行：
 
 ```powershell
 pip install transformers datasets evaluate peft accelerate scikit-learn pandas matplotlib tqdm
