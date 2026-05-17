@@ -1,52 +1,22 @@
 # lora-sst2-reproduction
 
-《人工智能导论》LoRA 论文复现项目：使用 `roberta-base` 在 GLUE/SST-2 上比较 full fine-tuning baseline 与 PEFT LoRA。
+《人工智能导论》LoRA 复现项目：`roberta-base` 在 GLUE/SST-2 上对比 full fine-tuning 与 PEFT LoRA。
 
-## 实验路线
+## 实验设置
 
 - 模型：`roberta-base`
 - 数据集：GLUE/SST-2
-- 框架：Python + PyTorch + Transformers + PEFT + Datasets + Evaluate
-- 方法：
-  - full fine-tuning baseline
-  - LoRA `r=4`
-  - LoRA `r=8`
-  - LoRA `r=16`
-- LoRA 配置：
-  - `LoraConfig`
-  - `get_peft_model`
-  - `target_modules=["query", "value"]`
+- 框架：PyTorch + Transformers + PEFT + Datasets + Evaluate
+- 实验：`full_finetune`、`lora_r4`、`lora_r8`、`lora_r16`
+- LoRA：`LoraConfig` + `get_peft_model`
+- LoRA 目标模块：`query`、`value`
+- LoRA 分类头：`modules_to_save=["classifier"]`
+- 默认 batch size：8，显存不足时用 4
+- fp16：开启
 
-## 输出文件
+## 环境安装
 
-实验会保留这些小型结果，方便写报告和截图：
-
-- `results/metrics.csv`
-- `results/logs/*.log`
-- `results/figures/loss_curve.png`
-- `results/figures/rank_accuracy.png`
-- `results/figures/trainable_params.png`
-
-大文件不会提交：
-
-- `checkpoints/`
-- `cache/`
-- Hugging Face 模型和数据集缓存
-- PyTorch 权重文件
-
-## 环境准备
-
-建议在 Windows + VS Code 终端中运行：
-
-```powershell
-py -3.11 -m venv .venv
-.\.venv\Scripts\Activate.ps1
-python -m pip install --upgrade pip
-```
-
-如果本机没有 Python 3.11，也可以用 Python 3.10。深度学习依赖对最新 Python 版本的支持可能滞后，不建议课程复现实验优先使用过新的 Python 版本。
-
-如果你确定当前 `python` 指向的是 3.10 或 3.11，也可以直接运行：
+Windows + VS Code PowerShell：
 
 ```powershell
 python -m venv .venv
@@ -54,110 +24,71 @@ python -m venv .venv
 python -m pip install --upgrade pip
 ```
 
-### 安装 CUDA 版 PyTorch
-
-先安装 CUDA 版 PyTorch，再安装 `requirements.txt` 中的项目通用依赖。
+先安装 CUDA 版 PyTorch：
 
 ```powershell
 pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu126
 ```
 
-安装后检查 GPU 是否可用：
-
-```powershell
-python -c "import torch; print(torch.__version__); print(torch.version.cuda); print(torch.cuda.is_available()); print(torch.cuda.get_device_name(0) if torch.cuda.is_available() else 'CUDA not available')"
-```
-
-### 安装项目通用依赖
-
-确认 CUDA 版 PyTorch 安装完成后，再安装其余依赖：
+再安装项目依赖：
 
 ```powershell
 pip install -r requirements.txt
 ```
 
-如果 CUDA 12.6 wheel 与本机驱动不匹配，请按 PyTorch 官网命令安装与你机器匹配的 CUDA 版 PyTorch，然后再执行：
+检查 GPU：
 
 ```powershell
-pip install transformers datasets evaluate peft accelerate scikit-learn pandas matplotlib tqdm
+python -c "import torch; print(torch.__version__); print(torch.version.cuda); print(torch.cuda.is_available()); print(torch.cuda.get_device_name(0) if torch.cuda.is_available() else 'CUDA not available')"
 ```
 
-## 一键运行
+## 运行
 
-默认 batch size 是 8，并开启 fp16：
-
-```powershell
-.\run_all.ps1
-```
-
-如果 8GB 显卡出现 OOM，把 batch size 改成 4：
-
-```powershell
-.\run_all.ps1 -BatchSize 4
-```
-
-正式实验不能带 `MaxTrainSamples` 或 `MaxEvalSamples`，否则会变成小样本冒烟测试，不能用于报告准确率。
-
-如果只想先快速检查流程是否能跑通，可以用小样本冒烟测试。冒烟测试只验证流程，不用于报告准确率；脚本会自动把实验名加上 `smoke_` 前缀，例如 `smoke_full_finetune`、`smoke_lora_r4`：
+冒烟测试只验证流程，不用于报告准确率。它会写入 `smoke_` 开头的记录，并跳过报告图表：
 
 ```powershell
 .\run_all.ps1 -BatchSize 4 -Epochs 1 -MaxTrainSamples 64 -MaxEvalSamples 64
 ```
 
-也可以用批处理脚本：
-
-```bat
-run_all.bat 4
-```
-
-## 单独运行某个实验
-
-Full fine-tuning：
+正式实验不能带 `MaxTrainSamples` 或 `MaxEvalSamples`：
 
 ```powershell
-python scripts/train.py --run_name full_finetune --method full --epochs 3 --batch_size 8 --fp16
+.\run_all.ps1
 ```
 
-LoRA r=8：
+如果 8GB 显卡 OOM：
 
 ```powershell
-python scripts/train.py --run_name lora_r8 --method lora --lora_rank 8 --epochs 3 --batch_size 8 --fp16
+.\run_all.ps1 -BatchSize 4
 ```
 
-重新生成图表：
+重新生成正式实验图表：
 
 ```powershell
 python scripts/plot_results.py
 ```
 
-## 指标说明
+## 输出
 
-`results/metrics.csv` 会记录：
+- `results/metrics.csv`
+- `results/logs/*.log`
+- `results/figures/loss_curve.png`
+- `results/figures/rank_accuracy.png`
+- `results/figures/trainable_params.png`
 
-- validation accuracy
-- training loss
-- trainable parameters
-- total parameters
-- trainable parameter ratio
-- training time
-- epochs、batch size、max train/eval samples、learning rate、fp16 状态
+`plot_results.py` 默认过滤 `smoke_` 开头的记录，只用正式实验生成图表。
 
-正式图表默认过滤掉 `run_name` 以 `smoke_` 开头的记录，避免冒烟测试结果污染报告图表。
+## 当前正式结果
 
-## 目录结构
+| 实验 | validation accuracy | training loss | trainable ratio | training time |
+| --- | ---: | ---: | ---: | ---: |
+| full_finetune | 0.9209 | 0.2667 | 1.0000 | 3552.46s |
+| lora_r4 | 0.9392 | 0.3142 | 0.0059 | 2596.12s |
+| lora_r8 | 0.9323 | 0.3052 | 0.0071 | 2166.64s |
+| lora_r16 | 0.9312 | 0.2973 | 0.0094 | 2198.35s |
 
-```text
-lora-sst2-reproduction/
-  scripts/
-    train.py
-    plot_results.py
-  results/
-    metrics.csv
-    logs/
-    figures/
-  run_all.ps1
-  run_all.bat
-  requirements.txt
-  README.md
-  .gitignore
-```
+完整指标见 `results/metrics.csv`。
+
+## Git 说明
+
+`checkpoints/`、`cache/`、模型权重和数据缓存不提交；`results/metrics.csv`、`results/logs/`、`results/figures/` 保留用于报告。
