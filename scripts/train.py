@@ -83,9 +83,27 @@ def count_parameters(model):
 def training_args_kwargs(**kwargs):
     signature = inspect.signature(TrainingArguments.__init__)
     params = signature.parameters
-    if "eval_strategy" in params:
+
+    if "evaluation_strategy" in kwargs and "eval_strategy" in params:
         kwargs["eval_strategy"] = kwargs.pop("evaluation_strategy")
-    return kwargs
+    elif "eval_strategy" in kwargs and "evaluation_strategy" in params:
+        kwargs["evaluation_strategy"] = kwargs.pop("eval_strategy")
+
+    return {key: value for key, value in kwargs.items() if key in params}
+
+
+def trainer_init_kwargs(**kwargs):
+    signature = inspect.signature(Trainer.__init__)
+    params = signature.parameters
+
+    tokenizer_arg = kwargs.pop("tokenizer", None)
+    if tokenizer_arg is not None:
+        if "tokenizer" in params:
+            kwargs["tokenizer"] = tokenizer_arg
+        elif "processing_class" in params:
+            kwargs["processing_class"] = tokenizer_arg
+
+    return {key: value for key, value in kwargs.items() if key in params}
 
 
 def append_metrics(row):
@@ -191,35 +209,35 @@ def main():
         return accuracy_metric.compute(predictions=predictions, references=labels)
 
     output_dir = CHECKPOINT_DIR / args.run_name
-    train_args = TrainingArguments(
-        **training_args_kwargs(
-            output_dir=str(output_dir),
-            overwrite_output_dir=True,
-            num_train_epochs=args.epochs,
-            per_device_train_batch_size=args.batch_size,
-            per_device_eval_batch_size=args.batch_size,
-            learning_rate=learning_rate,
-            weight_decay=args.weight_decay,
-            logging_dir=str(LOG_DIR / "trainer"),
-            logging_steps=args.logging_steps,
-            evaluation_strategy="epoch",
-            save_strategy="no",
-            report_to="none",
-            fp16=use_fp16,
-            seed=args.seed,
-            dataloader_num_workers=0,
-        )
+    train_args_kwargs = training_args_kwargs(
+        output_dir=str(output_dir),
+        overwrite_output_dir=True,
+        num_train_epochs=args.epochs,
+        per_device_train_batch_size=args.batch_size,
+        per_device_eval_batch_size=args.batch_size,
+        learning_rate=learning_rate,
+        weight_decay=args.weight_decay,
+        logging_dir=str(LOG_DIR / "trainer"),
+        logging_steps=args.logging_steps,
+        evaluation_strategy="epoch",
+        save_strategy="no",
+        report_to="none",
+        fp16=use_fp16,
+        seed=args.seed,
+        dataloader_num_workers=0,
     )
+    train_args = TrainingArguments(**train_args_kwargs)
 
-    trainer = Trainer(
+    trainer_kwargs = trainer_init_kwargs(
         model=model,
         args=train_args,
         train_dataset=encoded["train"],
         eval_dataset=encoded["validation"],
-        tokenizer=tokenizer,
-        data_collator=DataCollatorWithPadding(tokenizer=tokenizer),
         compute_metrics=compute_metrics,
+        data_collator=DataCollatorWithPadding(tokenizer=tokenizer),
+        tokenizer=tokenizer,
     )
+    trainer = Trainer(**trainer_kwargs)
 
     start_time = time.perf_counter()
     train_result = trainer.train()

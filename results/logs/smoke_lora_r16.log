@@ -1,0 +1,115 @@
+2026-05-17 18:25:26,922 | INFO | Run: smoke_lora_r16
+2026-05-17 18:25:26,923 | INFO | Arguments: {'run_name': 'smoke_lora_r16', 'method': 'lora', 'lora_rank': 16, 'model_name': 'roberta-base', 'epochs': 1.0, 'batch_size': 4, 'learning_rate': 2e-05, 'lora_learning_rate': 0.0001, 'weight_decay': 0.01, 'max_length': 128, 'seed': 42, 'fp16': True, 'gradient_checkpointing': False, 'logging_steps': 50, 'max_train_samples': 64, 'max_eval_samples': 64}
+2026-05-17 18:25:26,923 | INFO | CUDA available: True
+2026-05-17 18:25:26,924 | INFO | GPU: NVIDIA GeForce RTX 4070 Laptop GPU
+2026-05-17 18:25:29,272 | INFO | HTTP Request: HEAD https://huggingface.co/roberta-base/resolve/main/config.json "HTTP/1.1 200 OK"
+2026-05-17 18:25:29,582 | INFO | HTTP Request: HEAD https://huggingface.co/roberta-base/resolve/main/tokenizer_config.json "HTTP/1.1 200 OK"
+2026-05-17 18:25:29,582 | WARNING | Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+2026-05-17 18:25:30,334 | INFO | HTTP Request: GET https://huggingface.co/api/models/roberta-base/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 307 Temporary Redirect"
+2026-05-17 18:25:30,623 | INFO | HTTP Request: GET https://huggingface.co/api/models/FacebookAI/roberta-base/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-05-17 18:25:30,914 | INFO | HTTP Request: GET https://huggingface.co/api/models/roberta-base/tree/main?recursive=true&expand=false "HTTP/1.1 307 Temporary Redirect"
+2026-05-17 18:25:31,203 | INFO | HTTP Request: GET https://huggingface.co/api/models/FacebookAI/roberta-base/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-05-17 18:25:32,322 | INFO | HTTP Request: HEAD https://huggingface.co/datasets/glue/resolve/main/README.md "HTTP/1.1 307 Temporary Redirect"
+2026-05-17 18:25:32,978 | INFO | HTTP Request: HEAD https://huggingface.co/datasets/nyu-mll/glue/resolve/main/README.md "HTTP/1.1 307 Temporary Redirect"
+2026-05-17 18:25:33,204 | INFO | HTTP Request: HEAD https://huggingface.co/api/resolve-cache/datasets/nyu-mll/glue/bcdcba79d07bc864c1c254ccfcedcce55bcc9a8c/README.md "HTTP/1.1 200 OK"
+2026-05-17 18:25:33,844 | INFO | HTTP Request: HEAD https://huggingface.co/datasets/glue/resolve/bcdcba79d07bc864c1c254ccfcedcce55bcc9a8c/glue.py "HTTP/1.1 307 Temporary Redirect"
+2026-05-17 18:25:34,589 | INFO | HTTP Request: HEAD https://huggingface.co/datasets/nyu-mll/glue/resolve/bcdcba79d07bc864c1c254ccfcedcce55bcc9a8c/glue.py "HTTP/1.1 404 Not Found"
+2026-05-17 18:25:35,639 | INFO | HTTP Request: HEAD https://s3.amazonaws.com/datasets.huggingface.co/datasets/datasets/glue/glue.py "HTTP/1.1 200 OK"
+2026-05-17 18:25:35,971 | INFO | HTTP Request: GET https://huggingface.co/api/datasets/glue/revision/bcdcba79d07bc864c1c254ccfcedcce55bcc9a8c "HTTP/1.1 307 Temporary Redirect"
+2026-05-17 18:25:36,264 | INFO | HTTP Request: GET https://huggingface.co/api/datasets/nyu-mll/glue/revision/bcdcba79d07bc864c1c254ccfcedcce55bcc9a8c "HTTP/1.1 200 OK"
+2026-05-17 18:25:36,548 | INFO | HTTP Request: HEAD https://huggingface.co/datasets/glue/resolve/bcdcba79d07bc864c1c254ccfcedcce55bcc9a8c/.huggingface.yaml "HTTP/1.1 307 Temporary Redirect"
+2026-05-17 18:25:36,845 | INFO | HTTP Request: HEAD https://huggingface.co/datasets/nyu-mll/glue/resolve/bcdcba79d07bc864c1c254ccfcedcce55bcc9a8c/.huggingface.yaml "HTTP/1.1 404 Not Found"
+2026-05-17 18:25:39,109 | INFO | HTTP Request: GET https://datasets-server.huggingface.co/info?dataset=glue "HTTP/1.1 404 Not Found"
+2026-05-17 18:25:39,368 | INFO | HTTP Request: GET https://huggingface.co/api/datasets/glue/tree/bcdcba79d07bc864c1c254ccfcedcce55bcc9a8c/ax?recursive=true&expand=false "HTTP/1.1 307 Temporary Redirect"
+2026-05-17 18:25:40,062 | INFO | HTTP Request: GET https://huggingface.co/api/datasets/nyu-mll/glue/tree/bcdcba79d07bc864c1c254ccfcedcce55bcc9a8c/ax?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-05-17 18:25:40,333 | INFO | HTTP Request: GET https://huggingface.co/api/datasets/glue/tree/bcdcba79d07bc864c1c254ccfcedcce55bcc9a8c?recursive=false&expand=false "HTTP/1.1 307 Temporary Redirect"
+2026-05-17 18:25:40,592 | INFO | HTTP Request: GET https://huggingface.co/api/datasets/nyu-mll/glue/tree/bcdcba79d07bc864c1c254ccfcedcce55bcc9a8c?recursive=false&expand=false "HTTP/1.1 200 OK"
+2026-05-17 18:25:40,877 | INFO | HTTP Request: HEAD https://huggingface.co/datasets/glue/resolve/bcdcba79d07bc864c1c254ccfcedcce55bcc9a8c/dataset_infos.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-17 18:25:41,173 | INFO | HTTP Request: HEAD https://huggingface.co/datasets/nyu-mll/glue/resolve/bcdcba79d07bc864c1c254ccfcedcce55bcc9a8c/dataset_infos.json "HTTP/1.1 404 Not Found"
+2026-05-17 18:25:41,433 | INFO | HTTP Request: GET https://huggingface.co/api/datasets/glue/tree/bcdcba79d07bc864c1c254ccfcedcce55bcc9a8c/sst2?recursive=true&expand=false "HTTP/1.1 307 Temporary Redirect"
+2026-05-17 18:25:41,709 | INFO | HTTP Request: GET https://huggingface.co/api/datasets/nyu-mll/glue/tree/bcdcba79d07bc864c1c254ccfcedcce55bcc9a8c/sst2?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-05-17 18:25:43,327 | INFO | HTTP Request: HEAD https://huggingface.co/roberta-base/resolve/main/config.json "HTTP/1.1 200 OK"
+2026-05-17 18:25:43,637 | INFO | HTTP Request: HEAD https://huggingface.co/roberta-base/resolve/main/config.json "HTTP/1.1 200 OK"
+2026-05-17 18:25:43,745 | INFO | Trainable parameters: 1181954
+2026-05-17 18:25:43,745 | INFO | Total parameters: 125829124
+2026-05-17 18:25:43,745 | INFO | Trainable parameter ratio: 0.009393
+2026-05-17 18:54:54,474 | INFO | Run: smoke_lora_r16
+2026-05-17 18:54:54,475 | INFO | Arguments: {'run_name': 'smoke_lora_r16', 'method': 'lora', 'lora_rank': 16, 'model_name': 'roberta-base', 'epochs': 1.0, 'batch_size': 4, 'learning_rate': 2e-05, 'lora_learning_rate': 0.0001, 'weight_decay': 0.01, 'max_length': 128, 'seed': 42, 'fp16': True, 'gradient_checkpointing': False, 'logging_steps': 50, 'max_train_samples': 64, 'max_eval_samples': 64}
+2026-05-17 18:54:54,475 | INFO | CUDA available: True
+2026-05-17 18:54:54,476 | INFO | GPU: NVIDIA GeForce RTX 4070 Laptop GPU
+2026-05-17 18:54:56,139 | INFO | HTTP Request: HEAD https://huggingface.co/roberta-base/resolve/main/config.json "HTTP/1.1 200 OK"
+2026-05-17 18:54:56,140 | WARNING | Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+2026-05-17 18:54:56,395 | INFO | HTTP Request: HEAD https://huggingface.co/roberta-base/resolve/main/tokenizer_config.json "HTTP/1.1 200 OK"
+2026-05-17 18:54:57,059 | INFO | HTTP Request: GET https://huggingface.co/api/models/roberta-base/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 307 Temporary Redirect"
+2026-05-17 18:54:57,336 | INFO | HTTP Request: GET https://huggingface.co/api/models/FacebookAI/roberta-base/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-05-17 18:54:57,618 | INFO | HTTP Request: GET https://huggingface.co/api/models/roberta-base/tree/main?recursive=true&expand=false "HTTP/1.1 307 Temporary Redirect"
+2026-05-17 18:54:57,860 | INFO | HTTP Request: GET https://huggingface.co/api/models/FacebookAI/roberta-base/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-05-17 18:54:58,295 | INFO | HTTP Request: HEAD https://huggingface.co/datasets/glue/resolve/main/README.md "HTTP/1.1 307 Temporary Redirect"
+2026-05-17 18:54:58,523 | INFO | HTTP Request: HEAD https://huggingface.co/datasets/nyu-mll/glue/resolve/main/README.md "HTTP/1.1 307 Temporary Redirect"
+2026-05-17 18:54:58,678 | INFO | HTTP Request: HEAD https://huggingface.co/api/resolve-cache/datasets/nyu-mll/glue/bcdcba79d07bc864c1c254ccfcedcce55bcc9a8c/README.md "HTTP/1.1 200 OK"
+2026-05-17 18:54:58,907 | INFO | HTTP Request: HEAD https://huggingface.co/datasets/glue/resolve/bcdcba79d07bc864c1c254ccfcedcce55bcc9a8c/glue.py "HTTP/1.1 307 Temporary Redirect"
+2026-05-17 18:54:59,138 | INFO | HTTP Request: HEAD https://huggingface.co/datasets/nyu-mll/glue/resolve/bcdcba79d07bc864c1c254ccfcedcce55bcc9a8c/glue.py "HTTP/1.1 404 Not Found"
+2026-05-17 18:55:00,653 | INFO | HTTP Request: HEAD https://s3.amazonaws.com/datasets.huggingface.co/datasets/datasets/glue/glue.py "HTTP/1.1 200 OK"
+2026-05-17 18:55:00,917 | INFO | HTTP Request: GET https://huggingface.co/api/datasets/glue/revision/bcdcba79d07bc864c1c254ccfcedcce55bcc9a8c "HTTP/1.1 307 Temporary Redirect"
+2026-05-17 18:55:01,150 | INFO | HTTP Request: GET https://huggingface.co/api/datasets/nyu-mll/glue/revision/bcdcba79d07bc864c1c254ccfcedcce55bcc9a8c "HTTP/1.1 200 OK"
+2026-05-17 18:55:01,397 | INFO | HTTP Request: HEAD https://huggingface.co/datasets/glue/resolve/bcdcba79d07bc864c1c254ccfcedcce55bcc9a8c/.huggingface.yaml "HTTP/1.1 307 Temporary Redirect"
+2026-05-17 18:55:01,629 | INFO | HTTP Request: HEAD https://huggingface.co/datasets/nyu-mll/glue/resolve/bcdcba79d07bc864c1c254ccfcedcce55bcc9a8c/.huggingface.yaml "HTTP/1.1 404 Not Found"
+2026-05-17 18:55:02,615 | INFO | HTTP Request: GET https://datasets-server.huggingface.co/info?dataset=glue "HTTP/1.1 404 Not Found"
+2026-05-17 18:55:03,546 | INFO | HTTP Request: GET https://huggingface.co/api/datasets/glue/tree/bcdcba79d07bc864c1c254ccfcedcce55bcc9a8c/ax?recursive=true&expand=false "HTTP/1.1 307 Temporary Redirect"
+2026-05-17 18:55:03,783 | INFO | HTTP Request: GET https://huggingface.co/api/datasets/nyu-mll/glue/tree/bcdcba79d07bc864c1c254ccfcedcce55bcc9a8c/ax?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-05-17 18:55:04,012 | INFO | HTTP Request: GET https://huggingface.co/api/datasets/glue/tree/bcdcba79d07bc864c1c254ccfcedcce55bcc9a8c?recursive=false&expand=false "HTTP/1.1 307 Temporary Redirect"
+2026-05-17 18:55:04,298 | INFO | HTTP Request: GET https://huggingface.co/api/datasets/nyu-mll/glue/tree/bcdcba79d07bc864c1c254ccfcedcce55bcc9a8c?recursive=false&expand=false "HTTP/1.1 200 OK"
+2026-05-17 18:55:04,535 | INFO | HTTP Request: HEAD https://huggingface.co/datasets/glue/resolve/bcdcba79d07bc864c1c254ccfcedcce55bcc9a8c/dataset_infos.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-17 18:55:04,767 | INFO | HTTP Request: HEAD https://huggingface.co/datasets/nyu-mll/glue/resolve/bcdcba79d07bc864c1c254ccfcedcce55bcc9a8c/dataset_infos.json "HTTP/1.1 404 Not Found"
+2026-05-17 18:55:05,010 | INFO | HTTP Request: GET https://huggingface.co/api/datasets/glue/tree/bcdcba79d07bc864c1c254ccfcedcce55bcc9a8c/sst2?recursive=true&expand=false "HTTP/1.1 307 Temporary Redirect"
+2026-05-17 18:55:05,251 | INFO | HTTP Request: GET https://huggingface.co/api/datasets/nyu-mll/glue/tree/bcdcba79d07bc864c1c254ccfcedcce55bcc9a8c/sst2?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-05-17 18:55:06,860 | INFO | HTTP Request: HEAD https://huggingface.co/roberta-base/resolve/main/config.json "HTTP/1.1 200 OK"
+2026-05-17 18:55:07,109 | INFO | HTTP Request: HEAD https://huggingface.co/roberta-base/resolve/main/config.json "HTTP/1.1 200 OK"
+2026-05-17 18:55:07,231 | INFO | Trainable parameters: 1181954
+2026-05-17 18:55:07,231 | INFO | Total parameters: 125829124
+2026-05-17 18:55:07,232 | INFO | Trainable parameter ratio: 0.009393
+2026-05-17 18:55:13,100 | INFO | Training metrics: {'train_runtime': 1.5029, 'train_samples_per_second': 42.584, 'train_steps_per_second': 10.646, 'total_flos': 756463691808.0, 'train_loss': 0.7180709838867188, 'epoch': 1.0}
+2026-05-17 18:55:13,101 | INFO | Evaluation metrics: {'eval_loss': 0.6949539184570312, 'eval_accuracy': 0.484375, 'eval_runtime': 0.3114, 'eval_samples_per_second': 205.535, 'eval_steps_per_second': 51.384, 'epoch': 1.0}
+2026-05-17 18:55:13,101 | INFO | Training time seconds: 1.67
+2026-05-17 18:55:13,101 | INFO | Metrics appended to D:\GitHub\lora-sst2-reproduction\results\metrics.csv
+2026-05-17 18:55:13,102 | INFO | Log written to D:\GitHub\lora-sst2-reproduction\results\logs\smoke_lora_r16.log
+2026-05-17 19:02:30,422 | INFO | Run: smoke_lora_r16
+2026-05-17 19:02:30,423 | INFO | Arguments: {'run_name': 'smoke_lora_r16', 'method': 'lora', 'lora_rank': 16, 'model_name': 'roberta-base', 'epochs': 1.0, 'batch_size': 4, 'learning_rate': 2e-05, 'lora_learning_rate': 0.0001, 'weight_decay': 0.01, 'max_length': 128, 'seed': 42, 'fp16': True, 'gradient_checkpointing': False, 'logging_steps': 50, 'max_train_samples': 64, 'max_eval_samples': 64}
+2026-05-17 19:02:30,423 | INFO | CUDA available: True
+2026-05-17 19:02:30,424 | INFO | GPU: NVIDIA GeForce RTX 4070 Laptop GPU
+2026-05-17 19:02:32,750 | INFO | HTTP Request: HEAD https://huggingface.co/roberta-base/resolve/main/config.json "HTTP/1.1 200 OK"
+2026-05-17 19:02:33,000 | INFO | HTTP Request: HEAD https://huggingface.co/roberta-base/resolve/main/tokenizer_config.json "HTTP/1.1 200 OK"
+2026-05-17 19:02:33,000 | WARNING | Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+2026-05-17 19:02:33,251 | INFO | HTTP Request: GET https://huggingface.co/api/models/roberta-base/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 307 Temporary Redirect"
+2026-05-17 19:02:33,513 | INFO | HTTP Request: GET https://huggingface.co/api/models/FacebookAI/roberta-base/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-05-17 19:02:33,815 | INFO | HTTP Request: GET https://huggingface.co/api/models/roberta-base/tree/main?recursive=true&expand=false "HTTP/1.1 307 Temporary Redirect"
+2026-05-17 19:02:34,061 | INFO | HTTP Request: GET https://huggingface.co/api/models/FacebookAI/roberta-base/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-05-17 19:02:34,495 | INFO | HTTP Request: HEAD https://huggingface.co/datasets/glue/resolve/main/README.md "HTTP/1.1 307 Temporary Redirect"
+2026-05-17 19:02:35,033 | INFO | HTTP Request: HEAD https://huggingface.co/datasets/nyu-mll/glue/resolve/main/README.md "HTTP/1.1 307 Temporary Redirect"
+2026-05-17 19:02:35,194 | INFO | HTTP Request: HEAD https://huggingface.co/api/resolve-cache/datasets/nyu-mll/glue/bcdcba79d07bc864c1c254ccfcedcce55bcc9a8c/README.md "HTTP/1.1 200 OK"
+2026-05-17 19:02:35,576 | INFO | HTTP Request: HEAD https://huggingface.co/datasets/glue/resolve/bcdcba79d07bc864c1c254ccfcedcce55bcc9a8c/glue.py "HTTP/1.1 307 Temporary Redirect"
+2026-05-17 19:02:36,017 | INFO | HTTP Request: HEAD https://huggingface.co/datasets/nyu-mll/glue/resolve/bcdcba79d07bc864c1c254ccfcedcce55bcc9a8c/glue.py "HTTP/1.1 404 Not Found"
+2026-05-17 19:02:37,166 | INFO | HTTP Request: HEAD https://s3.amazonaws.com/datasets.huggingface.co/datasets/datasets/glue/glue.py "HTTP/1.1 200 OK"
+2026-05-17 19:02:37,430 | INFO | HTTP Request: GET https://huggingface.co/api/datasets/glue/revision/bcdcba79d07bc864c1c254ccfcedcce55bcc9a8c "HTTP/1.1 307 Temporary Redirect"
+2026-05-17 19:02:37,681 | INFO | HTTP Request: GET https://huggingface.co/api/datasets/nyu-mll/glue/revision/bcdcba79d07bc864c1c254ccfcedcce55bcc9a8c "HTTP/1.1 200 OK"
+2026-05-17 19:02:37,944 | INFO | HTTP Request: HEAD https://huggingface.co/datasets/glue/resolve/bcdcba79d07bc864c1c254ccfcedcce55bcc9a8c/.huggingface.yaml "HTTP/1.1 307 Temporary Redirect"
+2026-05-17 19:02:38,216 | INFO | HTTP Request: HEAD https://huggingface.co/datasets/nyu-mll/glue/resolve/bcdcba79d07bc864c1c254ccfcedcce55bcc9a8c/.huggingface.yaml "HTTP/1.1 404 Not Found"
+2026-05-17 19:02:40,163 | INFO | HTTP Request: GET https://datasets-server.huggingface.co/info?dataset=glue "HTTP/1.1 404 Not Found"
+2026-05-17 19:02:40,793 | INFO | HTTP Request: GET https://huggingface.co/api/datasets/glue/tree/bcdcba79d07bc864c1c254ccfcedcce55bcc9a8c/ax?recursive=true&expand=false "HTTP/1.1 307 Temporary Redirect"
+2026-05-17 19:02:41,441 | INFO | HTTP Request: GET https://huggingface.co/api/datasets/nyu-mll/glue/tree/bcdcba79d07bc864c1c254ccfcedcce55bcc9a8c/ax?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-05-17 19:02:42,089 | INFO | HTTP Request: GET https://huggingface.co/api/datasets/glue/tree/bcdcba79d07bc864c1c254ccfcedcce55bcc9a8c?recursive=false&expand=false "HTTP/1.1 307 Temporary Redirect"
+2026-05-17 19:02:42,326 | INFO | HTTP Request: GET https://huggingface.co/api/datasets/nyu-mll/glue/tree/bcdcba79d07bc864c1c254ccfcedcce55bcc9a8c?recursive=false&expand=false "HTTP/1.1 200 OK"
+2026-05-17 19:02:42,968 | INFO | HTTP Request: HEAD https://huggingface.co/datasets/glue/resolve/bcdcba79d07bc864c1c254ccfcedcce55bcc9a8c/dataset_infos.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-17 19:02:43,648 | INFO | HTTP Request: HEAD https://huggingface.co/datasets/nyu-mll/glue/resolve/bcdcba79d07bc864c1c254ccfcedcce55bcc9a8c/dataset_infos.json "HTTP/1.1 404 Not Found"
+2026-05-17 19:02:43,932 | INFO | HTTP Request: GET https://huggingface.co/api/datasets/glue/tree/bcdcba79d07bc864c1c254ccfcedcce55bcc9a8c/sst2?recursive=true&expand=false "HTTP/1.1 307 Temporary Redirect"
+2026-05-17 19:02:44,227 | INFO | HTTP Request: GET https://huggingface.co/api/datasets/nyu-mll/glue/tree/bcdcba79d07bc864c1c254ccfcedcce55bcc9a8c/sst2?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-05-17 19:02:45,778 | INFO | HTTP Request: HEAD https://huggingface.co/roberta-base/resolve/main/config.json "HTTP/1.1 200 OK"
+2026-05-17 19:02:46,082 | INFO | HTTP Request: HEAD https://huggingface.co/roberta-base/resolve/main/config.json "HTTP/1.1 200 OK"
+2026-05-17 19:02:46,189 | INFO | Trainable parameters: 1181954
+2026-05-17 19:02:46,189 | INFO | Total parameters: 125829124
+2026-05-17 19:02:46,189 | INFO | Trainable parameter ratio: 0.009393
+2026-05-17 19:02:53,738 | INFO | Training metrics: {'train_runtime': 1.5451, 'train_samples_per_second': 41.421, 'train_steps_per_second': 10.355, 'total_flos': 756463691808.0, 'train_loss': 0.7180709838867188, 'epoch': 1.0}
+2026-05-17 19:02:53,738 | INFO | Evaluation metrics: {'eval_loss': 0.6949539184570312, 'eval_accuracy': 0.484375, 'eval_runtime': 0.3883, 'eval_samples_per_second': 164.812, 'eval_steps_per_second': 41.203, 'epoch': 1.0}
+2026-05-17 19:02:53,738 | INFO | Training time seconds: 1.72
+2026-05-17 19:02:53,739 | INFO | Metrics appended to D:\GitHub\lora-sst2-reproduction\results\metrics.csv
+2026-05-17 19:02:53,740 | INFO | Log written to D:\GitHub\lora-sst2-reproduction\results\logs\smoke_lora_r16.log
