@@ -1,0 +1,1 @@
+run_name,method,lora_rank,validation_accuracy,training_loss,trainable_parameters,total_parameters,trainable_parameter_ratio,training_time_seconds,epochs,batch_size,learning_rate,fp16

@@ -216,3 +216,28 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Project generated artifacts
+checkpoints/
+cache/
+hf_cache/
+wandb/
+runs/
+*.pt
+*.pth
+*.bin
+*.safetensors
+*.ckpt
+pytorch_model*
+adapter_model*
+training_args.bin
+
+# Keep small report artifacts.
+!results/
+!results/metrics.csv
+!results/logs/
+!results/logs/.gitkeep
+!results/logs/*.log
+!results/figures/
+!results/figures/.gitkeep
+!results/figures/*.png
